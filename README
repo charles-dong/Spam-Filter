@@ -1,0 +1,58 @@
+## SUMMARY
+
+Spam Filter uses three machine learning classifiers to filter emails: Naive Bayes, Decision Tree, and Random Forest.
+
+Naive Bayes: implementation of the Maximum Likelihood Naive Bayes classfier with Laplacian smoothing.
+
+Decision Tree: binary decision tests at each node using entropy as a measure of impurity. Each node chooses the test yielding the maximum decrease of impurity. Stops splitting at a node if the number of training examples assigned to its decision region is less chan C*m, where m is the training set size and C is in the set {0.005, 0.01, 0.05, 0.1}.
+
+Random Forest: random forest consisting of 11 independently learned random decision trees. At each node, considers a subset of three features randomly selected from all features yielding non-degenerate partitions. Uses entropy as a measure of impurity and the same stopping measure as above with C = 0.1. Predicts the class label using both the majority class scheme and the strategy based on the largest average posterior.
+
+## DATASET
+
+The dataset ("spamdata.mat") was derived from spam and non-spam emails collected a few years ago at Hewlett Packard Research Labs to test different spam detection algorithms. Each email is represented as a vector of 48 binary features indicating whether or not particular words occur in the email (the complete list of words can be found in the file “spambase names.txt”). The label y takes on two values, one corresponding to “ham” (i.e., valid email) and the other to “spam”.
+
+## SOURCE CODE DETAILS
+
+q4_nb_train.m trains Naive Bayes given a training set, learning the class prior and class conditional probabilities for every feature. 
+
+q4_nb_predict.m predicts the class labels for a given set of examples using a trained model.
+
+Script q4a.m computes the training and the test errors of the Naive Bayes classifier.
+
+q4_top_words.m computes the probabilities that a word is indicative of being spam or not.
+
+Script q4b.m outputs the top 6 indicative words for both classes.
+
+q4_entropy.m computes the entropy for a given set of class labels.
+
+q4_info_gain.m computes the information gain for a given subset (X,Y) of the training set using a specific feature as split test.
+
+q4_leaf_info.m computes the majority label and the posterior at the leaf node given the labels of the training examples falling in this node.
+
+q4_split.m finds the feature for splitting current training data that maximizes the information gain.
+
+q4_dt_train.m learns the decision tree. q4_dt_train_recursive.m does so recursively.
+
+q4_dt_predict.m predicts the labels of a set of examples using a given learned tree.
+
+Script q4c.m plots the training error and the test error of a decision tree learned for different choices of parameter C in set {0.005, 0.01, 0.05, 0.1}.
+
+q4_rf_split.m first identifies the feasible set of features (e.g. features that produce two non-empty branches). If the feasible set is empty, returns 0. Otherwise, randomly chooses a subset of (up to) three features from this feasible set, then returns the best split among these features.
+
+q4_rf_train.m trains the random tree, and q4_rf_train_recursive.m does so recursively.
+
+q4_rf_predict.m predicts the labels for a set of test examples X given a learned random forest using the majority class scheme. This function also computes the average class posteriors over all trees for the test examples.
+
+Script q4d.m computes the training error and test error for both prediction strategies: the majority class scheme and the largest average posterior.
+
+
+
+
+
+
+
+
+
+
+
